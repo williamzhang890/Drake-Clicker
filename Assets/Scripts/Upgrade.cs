@@ -12,6 +12,8 @@ public class Upgrade : MonoBehaviour
     public int clicksPerSecond = 1;
     public float cost = 20;
     public float costMultiplier = 1.5f;
+    public AudioSource source;
+    public AudioClip clip;
     // Start is called before the first frame update
     void Start()
     {
@@ -30,12 +32,13 @@ public class Upgrade : MonoBehaviour
             {
                 if (hit.transform == transform)
                 {
-                    Debug.Log("hit");
                     if (clicker.clicks >= cost)
                     {
                         clicker.clicks -= cost;
                         cost *= costMultiplier;
                         number++;
+
+                        source.PlayOneShot(clip);
                     }
                 }
             }

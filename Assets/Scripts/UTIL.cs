@@ -4,22 +4,30 @@ using UnityEngine;
 
 public class UTIL
 {
+    /*
+     * Credit goes to https://forum.unity.com/threads/outlined-text.43698/
+         */
     public static void drawOutline(Rect r, string text, GUIStyle style, Color c)
     {
+        
         Color old = style.normal.textColor;
         c.a = old.a;
-        style.normal.textColor = c;
-        GUI.Label(r, text, style);
+        // draw to the left
         r.x--;
         GUI.Label(r, text, style);
+        // draw to the right
         r.x += 2;
         GUI.Label(r, text, style);
+        // draw below
         r.x--;
         r.y--;
         GUI.Label(r, text, style);
+        // draw above
         r.y += 2;
         GUI.Label(r, text, style);
+
         style.normal.textColor = old;
+        // revert to previous
         r.y--;
         GUI.Label(r, text, style);
     }
@@ -47,6 +55,8 @@ public class UTIL
         float multiplier = number;
         bool found = false;
         Coin coin = Coin.SENTINEL;
+
+        // greedy look for highest coin value less than number
         foreach (Coin c in coins)
         {
             if (c.value <= number)
@@ -57,6 +67,8 @@ public class UTIL
                 break;
             }
         }
+
+        // create format
         string format;
         if (displayZeros)
         {
@@ -74,6 +86,8 @@ public class UTIL
                 format += "#";
             }
         }
+
+
         string output = multiplier.ToString(format);
         if (found)
         {

@@ -9,7 +9,9 @@ public class Clicker : MonoBehaviour
     public TextScript points;
     public TextScript plusOne;
     public float resizeWhenClick = .9f;
-    public float resizeSeconds = .2f;
+    public float resizeSeconds = .1f;
+    public AudioClip click;
+    public AudioSource source;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,11 +28,17 @@ public class Clicker : MonoBehaviour
             {
                 if (hit.transform == transform) {
                     clicks++;
+                    // draw + 1
                     TextScript textScript = Instantiate(plusOne);
                     textScript.transform.position = cam.ScreenToWorldPoint(Input.mousePosition);
                     textScript.text = "+1";
-                    textScript.fadeOut = true;
+                    textScript.fadeOut = true; // make it fade away
+                    // make button appear to be clicked
                     StartCoroutine(resize());
+                    // play click sound
+                    source.PlayOneShot(click);
+
+
                 }
             }
             

@@ -26,7 +26,7 @@ public class TextScript : MonoBehaviour
             Color c = style.normal.textColor;
             c.a = Mathf.Max(0, c.a - Time.deltaTime * alphasPerSecond);
             style.normal.textColor = c;
-            if (c.a == 0)
+            if (c.a == 0) // free up space
             {
                 Destroy(gameObject);
             }
