@@ -12,6 +12,7 @@ public class UTIL
         
         Color old = style.normal.textColor;
         c.a = old.a;
+        style.normal.textColor = c;
         // draw to the left
         r.x--;
         GUI.Label(r, text, style);
